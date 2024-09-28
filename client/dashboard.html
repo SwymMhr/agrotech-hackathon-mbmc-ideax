@@ -6,12 +6,12 @@
     <title>Dashboard</title>
 </head>
 <body>
-    <nav class="navbar fixed-top navbar-expand-md navbar-light bg-light pt-3 pb-3">
+    <nav class="navbar navbar-expand-md navbar-light bg-light pt-3 pb-3">
         <div class="container-xxl">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="/">
                 <span class="text-secondary fw-bold">
                 <i class="bi bi-book-half"></i>
-                    Project AgroTech
+                    AgroTech
                 </span>
             </a>
          
@@ -20,26 +20,7 @@
             </button>
         
             <div class="collapse navbar-collapse justify-content-end align-center" id="main-nav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                      <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
-                    </form>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/home.html">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/dashboard.html">Dashboard</a>
-                    </li>
-                    <li class="nav-item ms-2 d-none d-md-inline">
-                        <a class="btn btn-secondary" href="/login.html">Log in</a>
-                    </li>
-                    <li class="nav-item ms-2 d-none d-md-inline">
-                        <a class="btn border bg-white" href="/registration.html">Register</a>
-                    </li>
-                </ul>
+                
             </div>
         </div>
     </nav>
@@ -52,40 +33,8 @@
             Add Item
         </div>
 
-        <div class="row">
-            <div class="col">
-                <div class="card" style="width: 18rem;">
-                    <img src="..." class="card-img-top" alt="...">
-                    <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updateModal">Update</button>
-                    <button class="btn btn-primary">Delete</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col justify-content-center">
-                <div class="card" style="width: 18rem;">
-                    <img src="..." class="card-img-top" alt="...">
-                    <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updateModal">Update</button>
-                    <button class="btn btn-primary">Delete</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col justify-content-end">
-                <div class="card" style="width: 18rem;">
-                    <img src="..." class="card-img-top" alt="...">
-                    <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <button class="btn btn-primary ms-2" data-bs-toggle="modal" data-bs-target="#updateModal">Update</button>
-                    <button href="#" class="btn btn-primary">Delete</button>
-                    </div>
-                </div>
-            </div>
+        <div class="row gap-4" id="myProductList">
+            
         </div>
     </section>
 
@@ -97,26 +46,43 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <form>
+              <form enctype="multipart/form-data">
                 <label for="itemTitle" class="form-label mt-2">Item title:</label>
-                <input type="text" id="title" class="form-control" placeholder="e.g. Raddish" />
+                <input type="text" id="addProductTitle" class="form-control" placeholder="e.g. Raddish" />
 
                 <label for="itemPhoto" class="form-label mt-2">Photo:</label>
-                <input type="file" class="form-control-file form-control" id="photo" />
+                <input type="file" class="form-control-file form-control" id="addProductPhoto" />
 
+                <label for="itemPrice" class="form-label mt-2">Price:</label>
+                <input type="number" class="form-control" id="addProductPrice" placeholder="e.g. 100" />
+
+                <label for="category" class="form-label mt-2">Category:</label>
+                <select class="form-select" id="addProductCategory">
+                    <option selected>Choose...</option>
+                    <option value="vegetables">Vegetables</option>
+                    <option value="fruits">Fruits</option>
+                    <option value="Grains">Grains</option>
+                    <option value="dairy">Dairy</option>
+                    <option value="meat">Meat</option>
+                    <option value="fish">Fish</option>
+                    <option value="poultry">Poultry</option>
+                    <option value="spices">Spices</option>
+                    <option value="others">Others</option>
+                </select>
+                
                 <label for="itemDescription" class="form-label mt-2">Description:</label>
-                <textarea class="form-control" id="description" rows="3" placeholder="Enter item Description here."></textarea>
+                <textarea class="form-control" id="addProductDescription" rows="3" placeholder="Enter item Description here."></textarea>
               </form>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Add</button>
+              <button type="button" id="addProductButton" class="btn btn-primary">Add</button>
             </div>
           </div>
         </div>
       </div>
 
-    <div class="modal" tabindex="-1" id="updateModal">
+    <!-- <div class="modal" tabindex="-1" id="updateModal">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
@@ -124,24 +90,41 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form>
-                    <label for="itemTitle" class="form-label mt-2">Item title:</label>
-                    <input type="text" id="title" class="form-control" placeholder="e.g. Raddish" />
-    
-                    <label for="itemPhoto" class="form-label mt-2">Photo:</label>
-                    <input type="file" class="form-control-file form-control" id="photo" />
-    
-                    <label for="itemDescription" class="form-label mt-2">Description:</label>
-                    <textarea class="form-control" id="description" rows="3" placeholder="Enter item Description here."></textarea>
-                  </form>
+              <form enctype="multipart/form-data">
+                <label for="itemTitle" class="form-label mt-2">Item title:</label>
+                <input type="text" id="updateProductTitle" class="form-control" placeholder="e.g. Raddish" />
+
+                <label for="itemPhoto" class="form-label mt-2">Photo:</label>
+                <input type="file" class="form-control-file form-control" id="updateProductPhoto" />
+
+                <label for="itemPrice" class="form-label mt-2">Price:</label>
+                <input type="number" class="form-control" id="updateProductPrice" placeholder="e.g. 100" />
+
+                <label for="category" class="form-label mt-2">Category:</label>
+                <select class="form-select" id="updateProductCategory">
+                    <option selected>Choose...</option>
+                    <option value="1">Vegetables</option>
+                    <option value="2">Fruits</option>
+                    <option value="3">Grains</option>
+                    <option value="4">Dairy</option>
+                    <option value="5">Meat</option>
+                    <option value="6">Fish</option>
+                    <option value="7">Poultry</option>
+                    <option value="8">Spices</option>
+                    <option value="9">Others</option>
+                </select>
+                
+                <label for="itemDescription" class="form-label mt-2">Description:</label>
+                <textarea class="form-control" id="updateProductDescription" rows="3" placeholder="Enter item Description here."></textarea>
+              </form>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Update</button>
+              <button type="button" class="btn btn-primary" id="updateProductButton">Update</button>
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
    
     
     <footer class="text-center fixed-bottom mt-3 bg-light">
@@ -156,7 +139,8 @@
         </section>
         
     </footer>
-
+    <script type="module" src="./script/navbar.js"></script>
+    <script type="module" src="/script/myproduct.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 </body>
 </html>

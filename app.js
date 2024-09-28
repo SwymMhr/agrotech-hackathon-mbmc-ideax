@@ -8,6 +8,7 @@ const cors = require("cors");
 const { connect } = require("./Database.js");
 const Auth = require("./routes/Auth");
 const Product = require("./routes/Product");
+const User = require("./routes/User");
 
 connect() // connecting database
 
@@ -21,7 +22,7 @@ app.use(express.static('public'));
 
 app.use('/api/auth', Auth); // Authentication routes
 app.use('/api/product',Product) // Product routes
-
+app.use('/api/user',User) // User routes
 app.listen(PORT, () => {
   console.log(`Server is listening at ${PORT}`);
 });

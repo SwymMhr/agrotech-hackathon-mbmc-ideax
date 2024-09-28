@@ -4,7 +4,7 @@ LOGIN_URL = `${SERVER_URL}auth/login`;
 const loginButton = document.getElementById("loginButton");
 loginButton.addEventListener("click", login);
 
-function login(e){
+async function login(e){
       e.stopPropagation();
       e.preventDefault();
       const email = document.getElementById("email").value;
@@ -12,13 +12,13 @@ function login(e){
       const error = document.getElementById("error");
       const data = {email: email, password: password};
       try{
-            fetch(LOGIN_URL, {
+            await fetch(LOGIN_URL, {
                   method: "POST",
                   headers: {
                         "Content-Type": "application/json",
                   },
                   body: JSON.stringify(data),
-            }).then(res => res.json()).then(response => {
+            }).then(response => response.json()).then(response => {
                   console.log(response['status'])
                   if(response['status'] === 200){
                         console.log(response['data']['token'])
