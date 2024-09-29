@@ -19,12 +19,14 @@ async function login(e){
                   },
                   body: JSON.stringify(data),
             }).then(response => response.json()).then(response => {
-                  console.log(response['status'])
+                  // console.log(response)
+                  // console.log(response['status'])
                   if(response['status'] === 200){
                         console.log(response['data']['token'])
                         sessionStorage.setItem("token", JSON.stringify(response['data']['token']));
                         sessionStorage.setItem("userId", JSON.stringify(response['data']['userId']));
                         sessionStorage.setItem("email", JSON.stringify(response['data']['email']));
+                        sessionStorage.setItem("role", JSON.stringify(response['data']['role']));
                         window.location.href = "../dashboard.html";
                   }else{
                         error.innerHTML = response['message'];

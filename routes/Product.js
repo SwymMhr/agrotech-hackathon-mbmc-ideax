@@ -3,12 +3,13 @@ const Product = require("../models/Product"); // Product model
 
 const response = require("../utils/ResponseHandlers"); // response handler
 
+
 // add a new product
 
 router.post("/add", async (req, res) => {
-
+console.log(req.body)
   try {
-    const { producttitle, price, description, category, image, userId } =
+    const { producttitle, price, description, category, image, userId,role } =
       req.body;
     if (
       !producttitle ||
@@ -16,7 +17,8 @@ router.post("/add", async (req, res) => {
       !description ||
       !category ||
       !image ||
-      !userId
+      !userId ||
+      !role
     ) {
       response(res, 400, "All fields are required", null);
     }
@@ -28,6 +30,7 @@ router.post("/add", async (req, res) => {
       category: req.body.category,
       image: req.body.image,
       userId: req.body.userId,
+      role: req.body.role,
     });
     const savedProduct = await product.save();
     response(res, 200, "Product Added successfully", savedProduct);
@@ -39,8 +42,18 @@ router.post("/add", async (req, res) => {
 // get all products
 router.get("/all", async (req, res) => {
   try {
-    const products = await Product.find({ isAvailable: true });
+    const products = await Product.find({role:'farmer', isAvailable: true });
     response(res, 200, "All products", products);
+  } catch (err) {
+    response(res, 500, err.message, null);
+  }
+});
+
+// get product by category business
+router.get("/business", async (req, res) => {
+  try {
+    const product = await Product.find({ role:'business', isAvailable:true });
+    response(res, 200, "Product Fetched!!!", product);
   } catch (err) {
     response(res, 500, err.message, null);
   }

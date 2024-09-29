@@ -1,11 +1,9 @@
-// import { SERVER_URL } from "../config.js"; // importing the config file
-// script to handle registration of new users
-
 const SERVER_URL = "http://localhost:5173/api/";
 const REGISTER_URL = `${SERVER_URL}auth/register`;
 
 const registerButton = document.getElementById("registerButton");
 registerButton.addEventListener("click", register);
+
 
 async function register(e) {
   e.preventDefault();
@@ -18,7 +16,6 @@ async function register(e) {
   const category = document.getElementById("category");
   const confirmPassword = document.getElementById("confirmPassword");
   const message = document.getElementById("message");
-  
   console.log(firstName.value, lastName.value, email.value, password.value, contact.value, category.value, confirmPassword.value);
 
   if (password.value !== confirmPassword.value) {
@@ -32,8 +29,9 @@ async function register(e) {
     email: email.value,
     password: password.value,
     contact: contact.value,
-    category: category.value,
+    category: category.value
   };
+  console.log(data);
   
   try {
     await fetch(REGISTER_URL, {

@@ -110,6 +110,7 @@ const addProduct = async (e) => {
     description: addProductDescription.value,
     image: image,
     category: addProductCategory.value,
+    role: JSON.parse(sessionStorage.getItem("role")),
     price: addProductPrice.value,
     userId: JSON.parse(sessionStorage.getItem("userId")),
     isAvailable: true,
